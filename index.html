@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .title {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" name="" id="todo" />
+    <button onclick="addElement()">Add Element</button>
+    <br />
+    <div id="results"></div>
+    <script src="script.js"></script>
+    <script>
+      fetch("https://jsonplaceholder.typicode.com/todos")
+        .then((response) => response.json())
+        .then((json) => {
+          let results = document.getElementById("results");
+          console.log(json);
+          json.forEach((element) => {
+            let newElement = document.createElement("p");
+            newElement.innerHTML = element.title;
+            results.appendChild(newElement);
+          });
+        });
+      function addElement() {
+        let newElement = document.createElement("p");
+        let textp = document.getElementById("todo").value;
+        let results = document.getElementById("results");
+        results.appendChild(newElement);
+        newElement.innerHTML = textp;
+        document.getElementById("todo").value = "";
+      }
+    </script>
+  </body>
+</html>
